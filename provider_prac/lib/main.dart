@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:provider_prac/provider/count_provider.dart';
 import 'package:provider_prac/provider/example_one_provider.dart';
 import 'package:provider_prac/provider/favourite_provider.dart';
+import 'package:provider_prac/provider/theme_changer_provider.dart';
 import 'package:provider_prac/screens/count_example.dart';
+import 'package:provider_prac/screens/dark_theme.dart';
 import 'package:provider_prac/screens/example_one.dart';
 import 'package:provider_prac/screens/favourite/favourite_screen.dart';
 import 'package:provider_prac/statefull_widget.dart';
@@ -26,16 +28,28 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => CountProvider()),
           ChangeNotifierProvider(create: (_) => ExampleOneProvider()),
           ChangeNotifierProvider(create: (_) => FavouriteItemProvider()),
+          ChangeNotifierProvider(create: (_) => ThemeChanger()),
         ],
-      child:  MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
-      ),
-      home:const FavouriteScreen(),
-    ),
+      child: Builder(
+          builder: (BuildContext context){
+            final themeChanger = Provider.of<ThemeChanger>(context);
+        return  MaterialApp(
+          title: 'Flutter Demo',
+          themeMode:themeChanger.themeMode,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            brightness: Brightness.light,
+            primarySwatch: Colors.blue,
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            appBarTheme: AppBarTheme(
+              color: Colors.teal
+            )
+          ),
+          home:const DarkThemeScreen(),
+        );
+      })
     );
 
 
