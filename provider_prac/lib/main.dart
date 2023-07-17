@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_prac/provider/auth_provider.dart';
 import 'package:provider_prac/provider/count_provider.dart';
 import 'package:provider_prac/provider/example_one_provider.dart';
 import 'package:provider_prac/provider/favourite_provider.dart';
@@ -8,6 +9,7 @@ import 'package:provider_prac/screens/count_example.dart';
 import 'package:provider_prac/screens/dark_theme.dart';
 import 'package:provider_prac/screens/example_one.dart';
 import 'package:provider_prac/screens/favourite/favourite_screen.dart';
+import 'package:provider_prac/screens/favourite/login.dart';
 import 'package:provider_prac/statefull_widget.dart';
 import 'package:provider_prac/stateless_widget.dart';
 import 'package:provider_prac/why_provider.dart';
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ExampleOneProvider()),
           ChangeNotifierProvider(create: (_) => FavouriteItemProvider()),
           ChangeNotifierProvider(create: (_) => ThemeChanger()),
+          ChangeNotifierProvider(create: (_) => AuthProvider()),
         ],
       child: Builder(
           builder: (BuildContext context){
@@ -47,7 +50,7 @@ class MyApp extends StatelessWidget {
               color: Colors.teal
             )
           ),
-          home:const DarkThemeScreen(),
+          home:const LoginScreen(),
         );
       })
     );
